@@ -6,7 +6,7 @@ from discord import Intents
 async def send_message(message, user_message, is_private):
     try:
         response = await responses.handle_response(
-            user_message, message.channel, message.author
+            user_message, message.channel, message.author, is_private
         )
         await message.author.send(
             response
