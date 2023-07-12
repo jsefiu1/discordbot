@@ -2,7 +2,7 @@ import discord
 from app import responses
 from discord import Intents
 
-gjirafa_channel_id = 1126827772661215292
+gjirafa_channel_id = 1127939891603452005
 weather_channel_id = 1127939921802448936
 
 async def send_message(message, user_message, is_private, target_channel):
