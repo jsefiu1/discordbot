@@ -3,3 +3,4 @@ requests==2.31.0
 googlesearch-python==1.2.3
 pillow==10.0.0  
 forex-python==1.8
+openai==0.27.8
