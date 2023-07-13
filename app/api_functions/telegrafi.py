@@ -80,7 +80,7 @@ async def data_telegrafi(p_message_list, channel, username, is_private):
         image.save(thumbnail_bytes, format='PNG')
         thumbnail_bytes.seek(0)
 
-        embed = Embed(title=result['name'], description=f"Scraping Date: {formatted_date_s}\nDate Posted: {formatted_date_p}", color=discord.Color.blue())
+        embed = Embed(title=f"{result['name']}", description=f"Article ID: {result['id']}\nScraping Date: {formatted_date_s}\nDate Posted: {formatted_date_p}", color=discord.Color.blue())
         embed.add_field(name="Details Link", value=f"{result['details_link']}")
         embed.set_thumbnail(url="attachment://thumbnail.png")  
         

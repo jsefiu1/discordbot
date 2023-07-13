@@ -2,8 +2,9 @@ import discord
 from discord import Embed
 import random
 from app.api_functions.telegrafi import scrape_telegrafi, data_telegrafi
-from app.api_functions.google_search import search_google
-from app.api_functions.currency import currency_convert
+from app.utils.google_search import search_google
+from app.utils.currency import currency_convert
+from app.utils.chatGPT import chatGPT_response
 
 async def handle_response(user_message, channel, username, is_private) -> Embed:
     p_message: str = user_message.lower()
@@ -56,4 +57,8 @@ async def handle_response(user_message, channel, username, is_private) -> Embed:
     if p_message_list[0] == "!convert":
         convert_result = await currency_convert(p_message_list, channel, username, is_private)
         return convert_result
+    
+    if p_message_list[0] == "/gpt":
+        gpt_result = await chatGPT_response(p_message_list, channel, username, is_private)
+        return gpt_result
 
