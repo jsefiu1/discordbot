@@ -1,0 +1,11 @@
+To use the chatGpt function all you have to do is:
+type '/gpt' as the first word of the message
+and whatever you write after that, it will go 
+as a message to chatGPT, ex:
+/gpt can you give me some ideas to celebrate my birthday
+/gpt has another function for telegrafi website
+to summarize the article content so you do not have to 
+actually go to the link to read the article, but you can 
+do it from discord channel
+To use this summarize function, type:
+/gpt summarize {Article_ID}

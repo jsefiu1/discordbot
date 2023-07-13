@@ -1,0 +1,5 @@
+To use the convert currencies function you type:
+!convert {amount} {currency_from} to {currency_to}
+So if you want to convert 20 US-Dollars to Euro, 
+check this example:
+!convert 20 usd to eur

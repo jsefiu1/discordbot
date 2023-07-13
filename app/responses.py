@@ -5,6 +5,7 @@ from app.api_functions.telegrafi import scrape_telegrafi, data_telegrafi
 from app.utils.google_search import search_google
 from app.utils.currency import currency_convert
 from app.utils.chatGPT import chatGPT_response
+from app.utils.commands import help_command, commands_telegrafi, commands_gpt, commands_google, commands_currencies
 
 async def handle_response(user_message, channel, username, is_private) -> Embed:
     p_message: str = user_message.lower()
@@ -16,23 +17,17 @@ async def handle_response(user_message, channel, username, is_private) -> Embed:
         return str(random.randint(1, 6))
 
     if p_message == "!help":
-        with open("app/text-files/help_message.txt", "r") as file:
-            content = file.read()
-            embed = discord.Embed(title="Help Message", description=content, color=discord.Color.green())
-            if is_private:
-                await username.send(embed=embed)
-            else:
-                await channel.send(embed=embed)    
+        await help_command(channel, username, is_private)
     
     if p_message_list[0] == "/commands":
         if p_message_list[1] == "telegrafi":
-            with open("app/text-files/commands_telegrafi.txt", "r") as file:
-                content = file.read()
-                embed = Embed(title="Telegrafi Commands", description=content, color=discord.Color.green())
-                if is_private:
-                    await username.send(embed=embed)
-                else:
-                    await channel.send(embed=embed)
+            await commands_telegrafi(channel, username, is_private)
+        elif p_message_list[1] == "gpt":
+            await commands_gpt(channel, username, is_private)
+        elif p_message_list[1] == "google":
+            await commands_google(channel, username, is_private)
+        elif p_message_list[1] == "currencies":
+            await commands_currencies(channel, username, is_private)
         else:
             return "Please correctly specify the website that you want commands for!"
          
