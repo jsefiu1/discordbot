@@ -4,11 +4,15 @@ from discord import Intents
 
 gjirafa_channel_id = 1127939891603452005
 weather_channel_id = 1127939921802448936
+nasa_channel_id = 1128641496598450277
 
 async def send_message(message, user_message, is_private, target_channel):
     try:
         response = await responses.handle_response(user_message, message.channel, message.author)
-        await target_channel.send(response) if is_private else await message.channel.send(response)
+        if isinstance(response, discord.Embed):
+            await target_channel.send(embed=response) if is_private else await message.channel.send(embed=response)
+        else:
+            await target_channel.send(response) if is_private else await message.channel.send(response)
     except Exception as e:
         print(e)
 
@@ -41,6 +45,11 @@ def run_discord_bot():
                 await send_message(message, user_message, is_private=False, target_channel=weather_channel)
             else:
                 await message.channel.send("The /weather command is not allowed in this channel.")
+        elif user_message.startswith("/nasa"):
+            if message.channel.id == nasa_channel_id:
+                nasa_channel = client.get_channel(nasa_channel_id)
+                await send_message(message, user_message, is_private=False,
+                target_channel=nasa_channel)
         elif user_message.startswith("/gjirafa"):
             if message.channel.id == gjirafa_channel_id:
                 gjirafa_channel = client.get_channel(gjirafa_channel_id)

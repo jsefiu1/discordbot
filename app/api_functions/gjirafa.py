@@ -1,25 +1,6 @@
 import discord
 import requests
 
-async def create_gjirafa_embed(results):
-    embed = discord.Embed(title="**Gjirafa Data Result**", color=discord.Color.orange())
-    
-    if results is not None:
-        for result in results:
-            name = result["name"]
-            date_scraped = result["date_scraped"]
-            price = result["price"]
-            details_link = result["details_link"]
-            
-            embed.add_field(name="Name", value=name, inline=True)
-            embed.add_field(name="Date Scraped", value=date_scraped, inline=True)
-            embed.add_field(name="Price", value=price, inline=True)
-            embed.add_field(name="Details", value=details_link, inline=False)
-    else:
-        embed.description = "No results found."
-
-    return embed
-
 async def scrape_gjirafa(p_message_list, channel):
     url_paths = [
         "/kozmetike",
@@ -56,6 +37,34 @@ async def scrape_gjirafa(p_message_list, channel):
 
     return f"```Done: Scraped {count} articles```"
 
+async def create_gjirafa_embed(results):
+    embed = discord.Embed(title="**Gjirafa Data Result**", color=discord.Color.orange())
+    embeds = []
+    total_characters = 0
+    
+    if results is not None:
+        for result in results:
+            name = result["name"]
+            date_scraped = result["date_scraped"]
+            price = result["price"]
+            details_link = result["details_link"]
+            
+            field_value = f"Name: {name}\nDate Scraped: {date_scraped}\nPrice: {price}\nDetails: {details_link}"
+            if total_characters + len(field_value) > 6000:
+                embeds.append(embed)
+                embed = discord.Embed(title="**Gjirafa Data Result**", color=discord.Color.orange())
+                total_characters = 0
+            
+            embed.add_field(name="\u200b", value=field_value, inline=False)
+            total_characters += len(field_value)
+            
+        embeds.append(embed)
+    else:
+        embed.description = "No results found."
+        embeds.append(embed)
+
+    return embeds
+
 async def data_gjirafa(p_message_list, channel):
     query_params = {}
     for argument in p_message_list[2:]:
@@ -71,7 +80,9 @@ async def data_gjirafa(p_message_list, channel):
 
     if response.status_code == 200:
         results = response.json()["results"]
-        embed = await create_gjirafa_embed(results)
-        await channel.send(embed=embed)
+        embeds = await create_gjirafa_embed(results)
+        
+        for embed in embeds:
+            await channel.send(embed=embed)
     else:
         await channel.send("Failed to retrieve data.")
