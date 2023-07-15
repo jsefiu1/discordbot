@@ -86,3 +86,15 @@ async def data_gjirafa(p_message_list, channel):
             await channel.send(embed=embed)
     else:
         await channel.send("Failed to retrieve data.")
+
+async def process_gjirafa_command(p_message_list, channel):
+    if len(p_message_list) >= 3:
+        query_params = {}
+        for arg in p_message_list[2:]:
+            if ":" in arg:
+                key, value = arg.split(":")
+                query_params[key] = value
+        results = await data_gjirafa(p_message_list, channel)
+        return results
+    else:
+        return "Invalid arguments for Gjirafa data retrieval. Use 'name:value' format."

@@ -50,7 +50,9 @@ def run_discord_bot():
                 nasa_channel = client.get_channel(nasa_channel_id)
                 await send_message(message, user_message, is_private=False,
                 target_channel=nasa_channel)
-        elif user_message.startswith("/gjirafa"):
+            else: 
+                await message.channel.send("The /nasa command is not allowed in this channel.")
+        elif user_message.startswith("/data gjirafa") or user_message.startswith("/scrape gjirafa"):
             if message.channel.id == gjirafa_channel_id:
                 gjirafa_channel = client.get_channel(gjirafa_channel_id)
                 if len(user_message.split()) >= 2:

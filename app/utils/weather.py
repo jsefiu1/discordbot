@@ -44,3 +44,15 @@ def format_weather_data(weather_data):
     embed.add_field(name="Temperature (Fahrenheit)", value=f'{temp_fahrenheit}°F', inline=True)
 
     return embed
+
+async def process_weather_command(p_message_list, channel):
+    if len(p_message_list) >= 2:
+        location = p_message_list[1]
+        weather_data = get_weather(location)
+        if weather_data:
+            formatted_data = format_weather_data(weather_data)
+            return formatted_data
+        else:
+            return "Unable to fetch weather data. Please try again later."
+    else:
+        return "Please provide a location for the weather command." 
