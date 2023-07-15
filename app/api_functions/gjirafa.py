@@ -94,7 +94,6 @@ async def process_gjirafa_command(p_message_list, channel):
             if ":" in arg:
                 key, value = arg.split(":")
                 query_params[key] = value
-        results = await data_gjirafa(p_message_list, channel)
-        return results
+        return await data_gjirafa(p_message_list, channel)
     else:
         return "Invalid arguments for Gjirafa data retrieval. Use 'name:value' format."
