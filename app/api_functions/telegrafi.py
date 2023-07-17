@@ -53,7 +53,7 @@ async def scrape_telegrafi(p_message_list, channel, username, is_private):
         else:
             await telegrafi_channel.send(embed=embed)
     else:
-        await channel.send("This function can be used only in telegrafi channel or in a private chat")
+        await channel.send("If you are not an admin, this function can be used only in telegrafi channel or in a private chat")
 
 
 async def data_telegrafi(p_message_list, channel, username, is_private):
