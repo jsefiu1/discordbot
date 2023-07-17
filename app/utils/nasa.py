@@ -6,8 +6,12 @@ BASE_URL = "https://api.nasa.gov/planetary/apod"
 
 async def process_nasa_command(p_message_list, channel,username, is_private):
  
-    nasa_channel = discord.utils.get(channel.guild.channels, name="nasa")
-    if isinstance(channel, discord.DMChannel) or channel.name.lower() == "nasa" or channel.permissions_for(channel.guild.me).administrator:
+    if isinstance(channel, discord.DMChannel):
+        nasa_channel = channel
+    else:
+        nasa_channel = discord.utils.get(channel.guild.channels, name="nasa")
+
+    if nasa_channel is not None or channel.permissions_for(username).administrator:
 
         url = None
         num_days = 1
@@ -68,3 +72,5 @@ async def process_nasa_command(p_message_list, channel,username, is_private):
             await username.send(embed=embed)
         else:
             await nasa_channel.send(embed=embed)
+    else:
+        await channel.send("This command only will work in channel nasa or private")

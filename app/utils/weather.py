@@ -6,8 +6,13 @@ BASE_URL = "http://api.openweathermap.org/data/2.5/weather"
 
 async def process_weather_command(p_message_list, channel,username, is_private):
   
-    weather_channel = discord.utils.get(channel.guild.channels, name="weather")
-    if isinstance(channel, discord.DMChannel) or channel.name.lower() == "weather" or channel.permissions_for(channel.guild.me).administrator:
+    if isinstance(channel, discord.DMChannel):
+        weather_channel = channel
+    else:
+        weather_channel = discord.utils.get(channel.guild.channels, name="weather")
+
+    if weather_channel is not None or channel.permissions_for(username).administrator:
+
        
         location = p_message_list[1] if len(p_message_list) >= 2 else None
 
