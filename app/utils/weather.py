@@ -56,3 +56,5 @@ async def process_weather_command(p_message_list, channel,username, is_private):
             await username.send(embed=embed)
         else:
             await weather_channel.send(embed=embed)
+    else:
+        await channel.send("This command only will work in channel weather or private")
