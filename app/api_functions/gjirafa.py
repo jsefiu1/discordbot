@@ -9,7 +9,6 @@ async def scrape_gjirafa(p_message_list, channel, username, is_private):
         gjirafa_channel = discord.utils.get(channel.guild.channels, name="gjirafa")
 
     if gjirafa_channel is not None or channel.permissions_for(username).administrator:
-
       
         url_paths = [
             "/kozmetike",
@@ -47,12 +46,16 @@ async def scrape_gjirafa(p_message_list, channel, username, is_private):
             )
             count += len(response.json())
 
+            embed = Embed(title="Scraping Status", description=f"Done: Scraped {count} articles from Telegrafi website.", color=discord.Color.red())
+
             if is_private:
                 await username.send(f"Scraped {len(response.json())} articles from {url_path}")
             else:
                 await gjirafa_channel.send(f"Scraped {len(response.json())} articles from {url_path}")
+    else:
+        await channel.send("This function will work only in gjirafa channel or private chat")
 
-        return f"```Done: Scraped {count} articles```"
+
 
 async def data_gjirafa(p_message_list, channel,username, is_private):
     if isinstance(channel, discord.DMChannel):
@@ -94,4 +97,4 @@ async def data_gjirafa(p_message_list, channel,username, is_private):
             else:
                 await gjirafa_channel.send(embed=embed)
     else:
-        await channel.send("Failed to retrieve data.")
+        await channel.send("This function will work only in gjirafa channel or private chat")
