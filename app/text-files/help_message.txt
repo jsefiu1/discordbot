@@ -1,0 +1,12 @@
+The primary function of me (bot) is to scrape and return data to you (user).
+The websites available to scrape are: 'Telegrafi', 'Gjirafa', 'Kosovajob'.
+For more info on how to use the scraper and the data function,
+please type all in lowercase:
+/commands [name of the website]
+If you want the bot to reply privately, just use '?' before text, for example:
+?!help
+I also have other functions for different uses. These functions are:
+Weather(weather), ChatGPT(gpt), Google-Search(google), Convert Currencies(currencies) and Nasa(nasa).
+To use these functions type:
+/commands [name of the function in the parentheses]
+For example: /commands gpt

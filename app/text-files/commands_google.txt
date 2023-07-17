@@ -1,0 +1,7 @@
+To use the google search function,
+you have to type !google and then 
+continue with what you want to search for.
+Example:
+!google who is the president of USA
+This will return the first 3 links that pop up
+on google search
