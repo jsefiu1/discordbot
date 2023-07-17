@@ -1,8 +1,6 @@
-import discord
 from discord import Embed
 import random
 import discord
-from discord import Embed
 from app.api_functions.telegrafi import scrape_telegrafi, data_telegrafi
 from app.api_functions.gjirafa import scrape_gjirafa, data_gjirafa
 from app.utils.google_search import search_google
@@ -25,7 +23,7 @@ async def handle_response(user_message, channel, username, is_private) -> Embed:
         return str(random.randint(1, 6))
 
     if p_message == "!help":
-        return "This is a help message"
+        await help_command(channel, username, is_private)
 
     if p_message_list[0] == "/commands":
         if len(p_message_list) < 2:
