@@ -1,0 +1,11 @@
+To use the gjirafa scraper you have to write this line:
+/scrape gjirafa page_numbers:1
+if you want more then 1 page to be scraped from each category,
+please change it to the number you desire
+
+To use the data function of gjirafa you have to write like this:
+/data gjirafa {parameters}
+parameters available are: 'limit','offset','title_contains'
+So if you want to return only 3 articles, you go ahead and write:
+/data gjirafa limit:3
+If you want to use the date filters, limit_price 

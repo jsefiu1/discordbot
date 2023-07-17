@@ -1,0 +1,4 @@
+To use the Weather API you have to write this line:
+/weather location
+Location can be a city or a country
+Command of the weather can be used only on weather channel

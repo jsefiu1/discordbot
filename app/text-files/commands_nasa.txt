@@ -1,0 +1,4 @@
+To use the Nasa API you have to write this line:
+/nasa random or /nasa {title}
+The title can be a planet or something else 
+Command of the nasa can be used only on nasa channel
