@@ -2,13 +2,12 @@ import random
 import discord
 from discord import Embed
 from app.api_functions.telegrafi import scrape_telegrafi, data_telegrafi
-from app.api_functions.gjirafa import scrape_gjirafa, data_gjirafa, process_gjirafa_command
-from app.utils.weather import  process_weather_command
+from app.api_functions.gjirafa import scrape_gjirafa, data_gjirafa
+from app.utils.weather import process_weather_command
 from app.utils.nasa import process_nasa_command
 from app.utils.commands import commands_gjirafa, commands_weather, commands_nasa
-from app.command_processor import process_command_result
 
-async def handle_response(user_message, channel, username) -> Embed:
+async def handle_response(user_message, channel, username, is_private) -> Embed:
     p_message: str = user_message.lower()
     p_message_list = p_message.split(" ")
 
@@ -37,10 +36,10 @@ async def handle_response(user_message, channel, username) -> Embed:
     if p_message_list[0] == "/scrape":
         if len(p_message_list) >= 2:
             if p_message_list[1] == "telegrafi":
-                scrape_result = await scrape_telegrafi(p_message_list, channel)
+                scrape_result = await scrape_telegrafi(p_message_list, channel, is_private)
                 return scrape_result
             elif p_message_list[1] == "gjirafa":
-                scrape_result = await scrape_gjirafa(p_message_list, channel)
+                scrape_result = await scrape_gjirafa(p_message_list, channel, username, is_private)
                 return scrape_result
 
     if p_message_list[0] == "/data":
@@ -51,13 +50,12 @@ async def handle_response(user_message, channel, username) -> Embed:
             await data_telegrafi(p_message_list, channel)
 
         elif p_message_list[1] == "gjirafa":
-            await process_command_result(channel, await process_gjirafa_command(p_message_list, channel))
-       
+            await data_gjirafa(p_message_list, channel, username, is_private)
         else:
             return "Invalid API specified for data retrieval!"
 
     if p_message_list[0] == "/weather":
-        await process_command_result(channel, await process_weather_command(p_message_list, channel))
+        await  process_weather_command(p_message_list, channel,username, is_private)
 
     if p_message_list[0] == "/nasa":
-        await process_command_result(channel, await process_nasa_command(p_message_list, channel))
+        await process_nasa_command(p_message_list, channel,username, is_private)
