@@ -8,8 +8,12 @@ import requests
 openai.api_key = "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"
 
 async def chatGPT_response(p_message_list, channel, username, is_private):
-    chatGPT_channel = discord.utils.get(channel.guild.channels, name="chatgpt")
-    if isinstance(channel, discord.DMChannel) or channel.name.lower() == "chatgpt" or channel.permissions_for(username).administrator:
+    if isinstance(channel, discord.DMChannel):
+        chatGPT_channel = channel
+    else:
+        chatGPT_channel = discord.utils.get(channel.guild.channels, name="chatgpt")
+
+    if chatGPT_channel is not None or channel.permissions_for(username).administrator:
         thumbnail_url = "https://ih1.redbubble.net/image.4645193321.0183/st,small,507x507-pad,600x600,f8f8f8.jpg"
 
         if p_message_list[1] == "summarize":

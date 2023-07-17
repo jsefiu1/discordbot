@@ -6,7 +6,7 @@ please type all in lowercase:
 If you want the bot to reply privately, just use '?' before text, for example:
 ?!help
 I also have other functions for different uses. These functions are:
-Weather, ChatGPT(gpt), Google-Search(google) and Convert Currencies(currencies).
+Weather(weather), ChatGPT(gpt), Google-Search(google), Convert Currencies(currencies) and Nasa(nasa).
 To use these functions type:
 /commands [name of the function in the parentheses]
 For example: /commands gpt

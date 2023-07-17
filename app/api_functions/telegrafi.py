@@ -8,8 +8,12 @@ import io
 
 
 async def scrape_telegrafi(p_message_list, channel, username, is_private):
-    telegrafi_channel = discord.utils.get(channel.guild.channels, name="telegrafi")
-    if isinstance(channel, discord.DMChannel) or channel.name.lower() == "telegrafi" or channel.permissions_for(username).administrator:
+    if isinstance(channel, discord.DMChannel):
+        telegrafi_channel = channel
+    else:
+        telegrafi_channel = discord.utils.get(channel.guild.channels, name="telegrafi")
+
+    if telegrafi_channel is not None or channel.permissions_for(username).administrator:
         url_paths = [
             "/lajme/",
             "/sport/",
@@ -57,8 +61,12 @@ async def scrape_telegrafi(p_message_list, channel, username, is_private):
 
 
 async def data_telegrafi(p_message_list, channel, username, is_private):
-    telegrafi_channel = discord.utils.get(channel.guild.channels, name="telegrafi")
-    if isinstance(channel, discord.DMChannel) or channel.name.lower() == "telegrafi" or channel.permissions_for(username).administrator:
+    if isinstance(channel, discord.DMChannel):
+        telegrafi_channel = channel
+    else:
+        telegrafi_channel = discord.utils.get(channel.guild.channels, name="telegrafi")
+
+    if telegrafi_channel is not None or channel.permissions_for(username).administrator:
         query_params = {}
         for argument in p_message_list[2:]:
             splitted_argument = argument.split(":")

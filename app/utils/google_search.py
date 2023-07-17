@@ -6,8 +6,12 @@ API_KEY = "AIzaSyBRDuu2P07VOQBVUtGd4m5KP8JB2wx3_S4"
 CSE_ID = "b5a161b512cf34d20"
 
 async def search_google(p_message_list, channel, username, is_private):
-    google_channel = discord.utils.get(channel.guild.channels, name="google")
-    if isinstance(channel, discord.DMChannel) or channel.name.lower() == "google" or channel.permissions_for(username).administrator:
+    if isinstance(channel, discord.DMChannel):
+        google_channel = channel
+    else:
+        google_channel = discord.utils.get(channel.guild.channels, name="google")
+
+    if google_channel is not None or channel.permissions_for(username).administrator:
         query = " ".join(p_message_list[1:])
         service = build("customsearch", "v1", developerKey=API_KEY)
         result = service.cse().list(q=query, num=6, cx=CSE_ID).execute()

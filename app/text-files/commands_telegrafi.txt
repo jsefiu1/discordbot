@@ -5,7 +5,8 @@ please change it to the number you desire
 
 To use the data function of telegrafi you have to write like this:
 /data telegrafi {parameters}
-parameters available are: 'limit','offset','title_contains','date_from','date_to'
+parameters available are: 'limit'(int),'offset'(int),'title_contains'(string),'date_from','date_to'
+and 'get_details'(boolean){If get_details is True, it takes more time to scrape}
 So if you want to return only 3 articles, you go ahead and write:
 /data telegrafi limit:3
 If you want to use the date filters, date format should be like this: YYYY-MM-DD
