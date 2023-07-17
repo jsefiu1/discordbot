@@ -25,11 +25,11 @@ async def handle_response(user_message, channel, username, is_private) -> Embed:
             return "Please specify the API that you want commands for!"
 
         if p_message_list[1] == "gjirafa":
-            await commands_gjirafa(channel, username)
+            await commands_gjirafa(channel, username, is_private)
         elif p_message_list[1] == "weather":
-            await commands_weather(channel, username)
+            await commands_weather(channel, username, is_private)
         elif p_message_list[1] == "nasa":
-            await commands_nasa(channel, username)
+            await commands_nasa(channel, username, is_private)
         else:
             return "Invalid API specified for commands!"
 
