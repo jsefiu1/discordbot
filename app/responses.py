@@ -49,7 +49,7 @@ async def handle_response(user_message, channel, username, is_private) -> Embed:
     if p_message_list[0] == "/scrape":
         if len(p_message_list) >= 2:
             if p_message_list[1] == "telegrafi":
-                scrape_result = await scrape_telegrafi(p_message_list, channel, is_private)
+                scrape_result = await scrape_telegrafi(p_message_list, channel, username, is_private)
                 return scrape_result
             elif p_message_list[1] == "gjirafa":
                 scrape_result = await scrape_gjirafa(p_message_list, channel, username, is_private)
@@ -61,7 +61,7 @@ async def handle_response(user_message, channel, username, is_private) -> Embed:
             return "Please specify the API for data retrieval!"
 
         if p_message_list[1] == "telegrafi":
-            await data_telegrafi(p_message_list, channel)
+            await data_telegrafi(p_message_list, channel, username, is_private)
 
         elif p_message_list[1] == "gjirafa":
             await data_gjirafa(p_message_list, channel, username, is_private)
