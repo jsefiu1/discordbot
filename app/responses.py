@@ -73,6 +73,7 @@ async def handle_response(user_message, channel, username, is_private) -> Embed:
 
         elif p_message_list[1] == "douglas":
             await data_douglas(p_message_list, channel, username, is_private)
+            
         else:
             return "Invalid API specified for data retrieval!"
 
