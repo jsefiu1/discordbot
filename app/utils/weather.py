@@ -11,7 +11,7 @@ async def process_weather_command(p_message_list, channel,username, is_private):
     else:
         weather_channel = discord.utils.get(channel.guild.channels, name="weather")
 
-    if weather_channel is not None or channel.permissions_for(username).administrator:
+    if isinstance(channel, discord.DMChannel) or channel.name.lower() == weather_channel.name or channel.permissions_for(username).administrator:
 
        
         location = p_message_list[1] if len(p_message_list) >= 2 else None

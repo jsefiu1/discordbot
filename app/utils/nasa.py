@@ -11,7 +11,7 @@ async def process_nasa_command(p_message_list, channel,username, is_private):
     else:
         nasa_channel = discord.utils.get(channel.guild.channels, name="nasa")
 
-    if nasa_channel is not None or channel.permissions_for(username).administrator:
+    if isinstance(channel, discord.DMChannel) or channel.name.lower() == nasa_channel.name or channel.permissions_for(username).administrator:
 
         url = None
         num_days = 1
