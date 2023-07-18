@@ -9,8 +9,8 @@ from app.utils.currency import currency_convert
 from app.utils.chatGPT import chatGPT_response
 from app.utils.weather import process_weather_command
 from app.utils.nasa import process_nasa_command
-from app.utils.commands import help_command, commands_telegrafi, commands_gpt, commands_google, commands_currencies, commands_douglas
-from app.utils.commands import commands_gjirafa, commands_weather, commands_nasa
+from app.utils.commands import help_command, commands_telegrafi, commands_gpt, commands_google, commands_currencies 
+from app.utils.commands import commands_gjirafa, commands_weather, commands_nasa, commands_douglas
 
 
 async def handle_response(user_message, channel, username, is_private) -> Embed:
@@ -59,7 +59,7 @@ async def handle_response(user_message, channel, username, is_private) -> Embed:
             elif p_message_list[1] == "douglas":
                 scrape_result = await scrape_douglas(p_message_list, channel, username, is_private)
                 return scrape_result
-        return "Incorrect scraper name! Please scpecify it correctly"
+        return "Incorrect scraper name! Please specify it correctly"
 
     if p_message_list[0] == "/data":
         if len(p_message_list) < 2:

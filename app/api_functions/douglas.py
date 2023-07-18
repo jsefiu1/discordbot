@@ -73,6 +73,9 @@ async def data_douglas(p_message_list, channel, username, is_private):
         results = response.json()["results"]
         
         for result in results:
+            #name = result["name"]
+            #price = result["price"]
+            #details_link = result["details_link"]
             date_scraped = datetime.datetime.strptime(result['date_scraped'], "%Y-%m-%dT%H:%M:%S.%f")
             formatted_date_s = date_scraped.strftime("%Y-%m-%d %H:%M")            
             
@@ -85,7 +88,10 @@ async def data_douglas(p_message_list, channel, username, is_private):
             thumbnail_bytes.seek(0)
             
             embed = Embed(title=f"{result['name']}", description=f"Product ID: {result['id']}\nScraping Date: {formatted_date_s}", color=discord.Color.blue())
-            embed.add_field(name="Details Link", value=f"{result['details_link']}")
+            embed.add_field(name="Name", value=name, inline=False)
+            #embed.add_field(name="Date Scraped", value=date_scraped, inline=False)
+            #embed.add_field(name="Price", value=price, inline=False)
+            #embed.add_field(name="Details Link", value=f"{result['details_link']}")
             embed.set_thumbnail(url="attachment://thumbnail.png")
             
             
