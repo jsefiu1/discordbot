@@ -1,0 +1,14 @@
+To use the douglas scraper you have to write this line:
+/scrape douglas page_numbers:1
+if you want more then 1 page to be scraped from each category,
+please change it to the number you desire.
+It is also this command 'get_details'(boolean) to take the text from details link
+{If get_details is True, it takes more time to scrape}
+/scrape douglas page_numbers:1 get_details:True
+
+To use the data function of douglas you have to write like this:
+/data douglas {parameters}
+parameters available are: 'limit'(int),'offset'(int),'title_contains'(string),limit_price'(number)
+So if you want to return only 3 products, you go ahead and write:
+/data douglas limit:3
+If you want to use the date filters, date format should be like this: YYYY-MM-DD
