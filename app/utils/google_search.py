@@ -11,7 +11,7 @@ async def search_google(p_message_list, channel, username, is_private):
     else:
         google_channel = discord.utils.get(channel.guild.channels, name="google")
 
-    if google_channel is not None or channel.permissions_for(username).administrator:
+    if isinstance(channel, discord.DMChannel) or channel.name.lower() == google_channel.name or channel.permissions_for(username).administrator:
         query = " ".join(p_message_list[1:])
         service = build("customsearch", "v1", developerKey=API_KEY)
         result = service.cse().list(q=query, num=6, cx=CSE_ID).execute()
