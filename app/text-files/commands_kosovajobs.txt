@@ -1,0 +1,8 @@
+To use the kosovajob scraper you have to write this line:
+/scrape kosovajobs
+
+To use the data function of kosovajob you have to write like this:
+/data kosovajobs {parameters}
+parameters available are: 'limit','offset','title','city'
+So if you want to return only jobs with title admin, you go ahead and write:
+/data kosovajobs title:admin
