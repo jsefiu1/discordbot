@@ -1,0 +1,4 @@
+**How to use the crypto command?**
+To get the data of a given cryptocurrency you have to use this command:
+/crypto bitcoin
+the bitcoin parameter tells the crypto command For which cryptocurrency do you want to know its data so after the /crypto command you should specify the crypto currency

@@ -1,0 +1,14 @@
+**How to scrape ofertasuksesi website?**
+To use the ofertasuksesi scraper you have to write this command:
+/scrape ofertasuksesi page:1
+the page:1 parameter specifies which page you want to scrape the first page or the second page of the website it depends how many pages the page has
+you can change the page number to whatever page you want
+
+**How to show the data you scraped?**
+To see the data that you scraped you have to write this command:
+/data ofertasuksesi {parameters}
+available parameters are: limit: int, offset: int
+An example of the parameters:
+/data ofertasuksesi limit:3 offset:3
+the limit parameter limits the data you want to see so in this example you will get only 3 offers
+the offset parameter in this example gives the data from id 3 and above but it will give us only 3 offers above the id 3 beacuse the limit is 3
