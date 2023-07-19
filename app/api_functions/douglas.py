@@ -6,8 +6,11 @@ from PIL import Image
 import io
 
 async def scrape_douglas(p_message_list, channel, username, is_private):
-    douglas_channel = discord.utils.get(channel.guild.channels, name = "douglas")
-    if isinstance(channel, discord.DMChannel) or channel.name.lower() == "douglas" or channel.permissions_for(username).administrator:
+    if isinstance(channel, discord.DMChannel):
+        douglas_channel = channel
+    else:
+        douglas_channel = discord.utils.get(channel.guild.channels, name="douglas")
+    if isinstance(channel, discord.DMChannel) or channel.name.lower() == douglas_channel.name or channel.permissions_for(username).administrator:
         url_paths = [
                  "brands",
                  "parfum/01",
@@ -54,8 +57,11 @@ async def scrape_douglas(p_message_list, channel, username, is_private):
         await channel.send("If you are not an admin, this function can be used only in douglas channel or in a private chat")
 
 async def data_douglas(p_message_list, channel, username, is_private):
-    douglas_channel = discord.utils.get(channel.guild.channels, name="douglas")
-    if isinstance(channel, discord.DMChannel) or channel.name.lower() == "douglas" or channel.permissions_for(username).administrator:
+    if isinstance(channel, discord.DMChannel):
+        douglas_channel = channel
+    else:
+        douglas_channel = discord.utils.get(channel.guild.channels, name="douglas")
+    if isinstance(channel, discord.DMChannel) or channel.name.lower() == douglas_channel.name or channel.permissions_for(username).administrator:
         query_params = {}
         for argument in p_message_list[2:]:
             splitted_argument = argument.split(":")
@@ -93,5 +99,5 @@ async def data_douglas(p_message_list, channel, username, is_private):
                 await username.send(embed=embed)
             else:
                 await douglas_channel.send(embed=embed)
-        else:
-            await channel.send("If you are not an admin, this function can be used only in douglas channel or in a private chat")
+    else:
+        await channel.send("If you are not an admin, this function can be used only in douglas channel or in a private chat")

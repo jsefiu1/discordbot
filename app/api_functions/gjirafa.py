@@ -1,6 +1,6 @@
 import discord
 import requests
-
+from discord import Embed
 async def scrape_gjirafa(p_message_list, channel, username, is_private):
    
     if isinstance(channel, discord.DMChannel):
