@@ -86,3 +86,13 @@ async def commands_douglas(channel, username, is_private):
                 await username.send(embed=embed)
             else:
                 await channel.send(embed=embed)
+                
+                
+async def commands_kosovajobs(channel, username,is_private):
+    with open("app/text-files/commands_kosovajobs.txt", "r") as file:
+        content = file.read()
+        embed = Embed(title="Kosovajobs Commands", description=content, color=discord.Color.green())
+        if is_private:
+            await username.send(embed=embed)
+        else:
+            await channel.send(embed=embed)

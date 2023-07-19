@@ -9,7 +9,7 @@ async def currency_convert(p_message_list, channel, username, is_private):
     else:
         currencies_channel = discord.utils.get(channel.guild.channels, name="currencies")
 
-    if currencies_channel is not None or channel.permissions_for(username).administrator:
+    if isinstance(channel, discord.DMChannel) or channel.name.lower() == currencies_channel.name or channel.permissions_for(username).administrator:
         thumbnail_url = "https://plus.unsplash.com/premium_photo-1679255807252-3c568399dfc2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Z29sZCUyMGNvaW5zfGVufDB8fDB8fHww&w=1000&q=80"
         amount = float(p_message_list[1])
         from_currency = p_message_list[2].upper()
