@@ -75,29 +75,23 @@ async def data_douglas(p_message_list, channel, username, is_private):
             price = result["price"]
             category = result["category"]
             date_scraped = datetime.datetime.strptime(result['date_scraped'], "%Y-%m-%dT%H:%M:%S.%f")
-            formatted_date_s = date_scraped.strftime("%Y-%m-%d %H:%M")            
+            formatted_date_s = date_scraped.strftime("%d-%m-%Y %H:%M")            
             
             
             embed = Embed(title=f"{result['name']}", description=f"Product ID: {result['id']}\nScraping Date: {formatted_date_s}", color=discord.Color.blue())
             embed.add_field(name="Category", value=category, inline=False)
             embed.add_field(name="Price", value=price, inline=False)
             embed.add_field(name="Details Link", value=f"{result['details_link']}")
-            embed.set_thumbnail(url="attachment://thumbnail.png")
+            embed.set_thumbnail(url=result['image_link'])
             
-            image_response = requests.get(result['image_link'])
-            image = Image.open(io.BytesIO(image_response.content))
-            thumbnail_size = (400, 400) 
-            image = image.resize(thumbnail_size)
-            thumbnail_bytes = io.BytesIO()
-            image.save(thumbnail_bytes, format='PNG')
-            thumbnail_bytes.seek(0)
+            
               
             
-            file = discord.File(thumbnail_bytes, filename='thumbnail.png')
+           
             
             if is_private:
-                await username.send(file=file, embed=embed)
+                await username.send(embed=embed)
             else:
-                await douglas_channel.send(file=file, embed=embed)
+                await douglas_channel.send(embed=embed)
         else:
             await channel.send("If you are not an admin, this function can be used only in douglas channel or in a private chat")
