@@ -13,14 +13,19 @@ from app.utils.jokes import generate_joke
 from app.utils.dictionary import search_word_definition
 from app.utils.movie import get_movie_info
 from app.utils.crypto import get_crypto_info
+from app.api_functions.gjirafa import scrape_gjirafa, data_gjirafa
+from app.api_functions.douglas import scrape_douglas, data_douglas
+from app.api_functions.kosovajob import scrape_kosovajobs,data_kosovajob
 from app.utils.google_search import search_google
 from app.utils.currency import currency_convert
 from app.utils.chatGPT import chatGPT_response
 from app.utils.weather import process_weather_command
 from app.utils.nasa import process_nasa_command
 from app.utils.commands import help_command, commands_telegrafi, commands_gpt, commands_google, commands_currencies
-from app.utils.commands import commands_gjirafa, commands_weather, commands_nasa
 from app.utils.commands import commands_ofertasuksesi, crypto_commands
+from app.utils.commands import commands_gjirafa, commands_weather, commands_nasa, commands_douglas
+from app.utils.commands import commands_kosovajobs
+
 
 
 async def handle_response(user_message, channel, username, is_private) -> Embed:
@@ -39,7 +44,7 @@ async def handle_response(user_message, channel, username, is_private) -> Embed:
     if p_message_list[0] == "/commands":
         if len(p_message_list) < 2:
             return "Please specify the API that you want commands for!"
-        
+
         if p_message_list[1] == "telegrafi":
             await commands_telegrafi(channel, username, is_private)
         elif p_message_list[1] == "gpt":
@@ -59,6 +64,10 @@ async def handle_response(user_message, channel, username, is_private) -> Embed:
         elif p_message_list[1] == "crypto":
             await crypto_commands(channel, username, is_private)
             
+        elif p_message_list[1] == "douglas":
+            await commands_douglas(channel, username, is_private)
+        elif p_message_list[1] == "kosovajobs":
+            await commands_kosovajobs(channel,username,is_private)
         else:
             return "Invalid API specified for commands!"
 
@@ -74,6 +83,12 @@ async def handle_response(user_message, channel, username, is_private) -> Embed:
                 scrape_result = await scrape_ofertasuksesi(p_message_list, channel, username, is_private)
                 return scrape_result
 
+            elif p_message_list[1] == "douglas":
+                scrape_result = await scrape_douglas(p_message_list, channel, username, is_private)
+                return scrape_result
+            elif p_message_list[1] == "kosovajobs":
+                scrape_result=await scrape_kosovajobs(p_message_list,channel,username,is_private)
+                return scrape_result
         else:
             return "Incorrect scraper name! Please scpecify it correctly"
 
@@ -91,6 +106,12 @@ async def handle_response(user_message, channel, username, is_private) -> Embed:
             data = await data_ofertasuksesi(p_message_list, channel, username, is_private)
             return data
 
+        elif p_message_list[1] == "douglas":
+            await data_douglas(p_message_list, channel, username, is_private)
+            
+        elif p_message_list[1] == "kosovajobs":
+            await data_kosovajob(p_message_list,channel,username,is_private)
+            
         else:
             return "Incorrect table name! Try one of ['telegrafi', 'kosovajobs', 'ofertasuksesi']"
 
@@ -121,3 +142,20 @@ async def handle_response(user_message, channel, username, is_private) -> Embed:
 
     if p_message_list[0] == "/crypto":
         await get_crypto_info(p_message_list[1], username, channel, is_private)
+    if p_message_list[0] == "/weather":
+        await process_weather_command(p_message_list, channel, username, is_private)
+
+    if p_message_list[0] == "/nasa":
+        await process_nasa_command(p_message_list, channel, username, is_private)
+
+    if p_message_list[0] == "!google":
+        search_result = await search_google(p_message_list, channel, username, is_private)
+        return search_result
+
+    if p_message_list[0] == "!convert":
+        convert_result = await currency_convert(p_message_list, channel, username, is_private)
+        return convert_result
+
+    if p_message_list[0] == "/gpt":
+        gpt_result = await chatGPT_response(p_message_list, channel, username, is_private)
+        return gpt_result

@@ -13,7 +13,7 @@ async def chatGPT_response(p_message_list, channel, username, is_private):
     else:
         chatGPT_channel = discord.utils.get(channel.guild.channels, name="chatgpt")
 
-    if chatGPT_channel is not None or channel.permissions_for(username).administrator:
+    if isinstance(channel, discord.DMChannel) or channel.name.lower() == chatGPT_channel.name or channel.permissions_for(username).administrator:
         thumbnail_url = "https://ih1.redbubble.net/image.4645193321.0183/st,small,507x507-pad,600x600,f8f8f8.jpg"
 
         if p_message_list[1] == "summarize":

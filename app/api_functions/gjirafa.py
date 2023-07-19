@@ -1,7 +1,6 @@
 import discord
 import requests
 from discord import Embed
-
 async def scrape_gjirafa(p_message_list, channel, username, is_private):
    
     if isinstance(channel, discord.DMChannel):
@@ -9,7 +8,7 @@ async def scrape_gjirafa(p_message_list, channel, username, is_private):
     else:
         gjirafa_channel = discord.utils.get(channel.guild.channels, name="gjirafa")
 
-    if gjirafa_channel is not None or channel.permissions_for(username).administrator:
+    if isinstance(channel, discord.DMChannel) or channel.name.lower() == gjirafa_channel.name or channel.permissions_for(username).administrator:
       
         url_paths = [
             "/kozmetike",
@@ -64,7 +63,7 @@ async def data_gjirafa(p_message_list, channel,username, is_private):
     else:
         gjirafa_channel = discord.utils.get(channel.guild.channels, name="gjirafa")
 
-    if gjirafa_channel is not None or channel.permissions_for(username).administrator:
+    if isinstance(channel, discord.DMChannel) or channel.name.lower() == gjirafa_channel.name or channel.permissions_for(username).administrator:
         query_params = {}
         for argument in p_message_list[2:]:
             splitted_argument = argument.split(":")
