@@ -12,3 +12,4 @@ parameters available are: 'limit'(int),'offset'(int),'title_contains'(string),li
 So if you want to return only 3 products, you go ahead and write:
 /data douglas limit:3
 If you want to use the date filters, date format should be like this: YYYY-MM-DD
+/data douglas limit_price:20 limit:5
