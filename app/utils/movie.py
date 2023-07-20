@@ -34,4 +34,4 @@ async def get_movie_info(movie_title, username, channel, is_private):
     else:
         channel.send(f"No data found for {movie_title} film!")
   else:
-      await channel.send("If you are not an admin, this function can be used only in ofertasuksesi channel or in a private chat")
+      await channel.send("If you are not an admin, this function can be used only in movies channel or in a private chat")

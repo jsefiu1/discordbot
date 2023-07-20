@@ -28,4 +28,4 @@ async def get_crypto_info(crypto_name, username, channel, is_private):
             else:
                 await crypto_channel.send(embed=embed)
     else:
-        await channel.send("If you are not an admin, this function can be used only in ofertasuksesi channel or in a private chat")
+        await channel.send("If you are not an admin, this function can be used only in crypto channel or in a private chat")

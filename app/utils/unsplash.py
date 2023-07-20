@@ -39,4 +39,4 @@ async def generate_image(img_name, channel, username, is_private):
             else:
                 return "Image not found"
     else:
-        await channel.send("If you are not an admin, this function can be used only in ofertasuksesi channel or in a private chat")
+        await channel.send("If you are not an admin, this function can be used only in images channel or in a private chat")

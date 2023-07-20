@@ -31,4 +31,4 @@ async def search_word_definition(word, channel, username, is_private):
         else:
             return "Something went wrong!"
     else:
-        await channel.send("If you are not an admin, this function can be used only in ofertasuksesi channel or in a private chat")
+        await channel.send("If you are not an admin, this function can be used only in define channel or in a private chat")

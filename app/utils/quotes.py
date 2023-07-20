@@ -25,4 +25,4 @@ async def generate_quote(username, channel, is_private):
         else:
             return 'Unable to fetch quote'
     else:
-        await channel.send("If you are not an admin, this function can be used only in ofertasuksesi channel or in a private chat")
+        await channel.send("If you are not an admin, this function can be used only in quotes channel or in a private chat")

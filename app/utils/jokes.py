@@ -24,4 +24,4 @@ async def generate_joke(is_private, username, channel):
       else:
          return "Opps... Something went wrong!"
    else:
-      await channel.send("If you are not an admin, this function can be used only in ofertasuksesi channel or in a private chat")
+      await channel.send("If you are not an admin, this function can be used only in jokes channel or in a private chat")

@@ -41,4 +41,4 @@ async def search_youtube_videos(title, username, channel, is_private):
         else:
             return "No results found"
     else:
-        await channel.send("If you are not an admin, this function can be used only in ofertasuksesi channel or in a private chat")
+        await channel.send("If you are not an admin, this function can be used only in youtube channel or in a private chat")

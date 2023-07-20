@@ -39,7 +39,7 @@ async def scrape_ofertasuksesi(p_message_list, channel, username, is_private):
         count = 0
         for url_path in url_paths:
             query_params["category"] = url_path
-            response = requests.get(url="http://localhost:8000/ofertasuksesi/scrape", params=query_params)
+            response = requests.post(url="http://localhost:8000/ofertasuksesi/scrape", params=query_params)
             count += len(response.json())
         
         embed = Embed(title="Scraping Status", description=f"Done: Scraped {count} offers from ofertasuksesi", color=discord.Color.red())

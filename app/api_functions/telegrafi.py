@@ -45,7 +45,7 @@ async def scrape_telegrafi(p_message_list, channel, username, is_private):
 
         for url_path in url_paths:
             query_params["url_path"] = url_path
-            response = requests.get(
+            response = requests.post(
                 url="http://localhost:8000/telegrafi/scrape",
                 params=query_params
             )
