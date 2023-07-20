@@ -1,0 +1,6 @@
+To use the Gazeta Express scraper you need to write this line:
+/scrape express <limit>
+
+To use the data function of Gazeta Express you have to write like this:
+/data express {parameters}
+parameters available are: 'limit','offset', 'title_contains'
