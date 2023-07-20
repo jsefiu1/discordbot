@@ -12,7 +12,7 @@ async def scrape_kosovajobs(p_message_list, channel,username,is_private):
     if isinstance(channel,discord.DMChannel) or channel.name.lower()==kosovajob_channel.name or channel.permissions_for(username).administrator:
         scrape_url = "http://localhost:8000/kosovajobs/scrape?url_path=https%3A%2F%2Fkosovajob.com%2F"
 
-        response = requests.get(scrape_url)
+        response = requests.post(scrape_url)
 
         if response.status_code == 200:
             embed = Embed(title="Scraping Status", description=f"Done: Scraped jobs from Kosovajobs website.",

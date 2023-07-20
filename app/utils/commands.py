@@ -1,8 +1,6 @@
 import discord
 from discord import Embed
 
-
-
 async def commands_telegrafi(channel, username, is_private):
     with open("app/text-files/commands_telegrafi.txt", "r") as file:
             content = file.read()
@@ -11,7 +9,6 @@ async def commands_telegrafi(channel, username, is_private):
                 await username.send(embed=embed)
             else:
                 await channel.send(embed=embed)
-                
 
 async def help_command(channel, username, is_private):
       with open("app/text-files/help_message.txt", "r") as file:
@@ -77,6 +74,14 @@ async def commands_nasa(channel, username, is_private):
     else:
         await channel.send(embed=embed)
 
+async def commands_ofertasuksesi(channel, username, is_private):
+    with open("app/text-files/commands_ofertasuksesi.txt", "r") as file:
+        content = file.read()
+        embed = Embed(title="Ofertasuksesi Commands", description=content, color=discord.Color.green())
+        if is_private:
+            await username.send(embed=embed)
+        else:
+            await channel.send(embed=embed)
 
 async def commands_douglas(channel, username, is_private):
     with open("app/text-files/commands_douglas.txt", "r") as file:
@@ -86,12 +91,20 @@ async def commands_douglas(channel, username, is_private):
                 await username.send(embed=embed)
             else:
                 await channel.send(embed=embed)
-                
-                
+                                
 async def commands_kosovajobs(channel, username,is_private):
     with open("app/text-files/commands_kosovajobs.txt", "r") as file:
         content = file.read()
         embed = Embed(title="Kosovajobs Commands", description=content, color=discord.Color.green())
+        if is_private:
+            await username.send(embed=embed)
+        else:
+            await channel.send(embed=embed)
+
+async def crypto_commands(channel, username, is_private):
+    with open("app/text-files/commands_crypto.txt", "r") as file:
+        content = file.read()
+        embed = Embed(title="Cryptocurrency Commands", description=content, color=discord.Color.green())
         if is_private:
             await username.send(embed=embed)
         else:

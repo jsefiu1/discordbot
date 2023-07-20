@@ -40,7 +40,7 @@ async def scrape_gjirafa(p_message_list, channel, username, is_private):
             else: 
                 await gjirafa_channel.send(f"Scraping {url_path} ...")
             query_params["url_path"] = url_path
-            response = requests.get(
+            response = requests.post(
                 url="http://localhost:8000/gjirafa/scrape",
                 params=query_params
             )
