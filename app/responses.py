@@ -16,6 +16,7 @@ from app.utils.crypto import get_crypto_info
 from app.api_functions.gjirafa import scrape_gjirafa, data_gjirafa
 from app.api_functions.douglas import scrape_douglas, data_douglas
 from app.api_functions.kosovajob import scrape_kosovajobs,data_kosovajob
+from app.api_functions.express import scrape_gazetaexpress, data_express
 from app.utils.google_search import search_google
 from app.utils.currency import currency_convert
 from app.utils.chatGPT import chatGPT_response
@@ -24,7 +25,7 @@ from app.utils.nasa import process_nasa_command
 from app.utils.commands import help_command, commands_telegrafi, commands_gpt, commands_google, commands_currencies
 from app.utils.commands import commands_ofertasuksesi, crypto_commands
 from app.utils.commands import commands_gjirafa, commands_weather, commands_nasa, commands_douglas
-from app.utils.commands import commands_kosovajobs
+from app.utils.commands import commands_kosovajobs, commands_express
 
 
 
@@ -38,7 +39,7 @@ async def handle_response(user_message, channel, username, is_private) -> Embed:
     if p_message == "roll":
         return str(random.randint(1, 6))
     
-    if p_message == "!help":
+    if p_message == "/help":
         await help_command(channel, username, is_private)
 
     if p_message_list[0] == "/commands":
@@ -68,6 +69,8 @@ async def handle_response(user_message, channel, username, is_private) -> Embed:
             await commands_douglas(channel, username, is_private)
         elif p_message_list[1] == "kosovajobs":
             await commands_kosovajobs(channel,username,is_private)
+        elif p_message_list[1] == "express":
+            await commands_express(channel,username,is_private)
         else:
             return "Invalid API specified for commands!"
 
@@ -89,8 +92,11 @@ async def handle_response(user_message, channel, username, is_private) -> Embed:
             elif p_message_list[1] == "kosovajobs":
                 scrape_result=await scrape_kosovajobs(p_message_list,channel,username,is_private)
                 return scrape_result
-        else:
-            return "Incorrect scraper name! Please scpecify it correctly"
+            elif p_message_list[1] == "express":
+                scrape_result=await scrape_gazetaexpress(p_message_list,channel,username,is_private)
+                return scrape_result
+            else:
+                return "Incorrect scraper name! Please scpecify it correctly"
 
     if p_message_list[0] == "/data":
         if len(p_message_list) < 2:
@@ -111,6 +117,9 @@ async def handle_response(user_message, channel, username, is_private) -> Embed:
             
         elif p_message_list[1] == "kosovajobs":
             await data_kosovajob(p_message_list,channel,username,is_private)
+
+        elif p_message_list[1] == "express":
+            await data_express(p_message_list,channel,username,is_private)    
             
         else:
             return "Incorrect table name! Try one of ['telegrafi', 'kosovajobs', 'ofertasuksesi']"
@@ -132,10 +141,6 @@ async def handle_response(user_message, channel, username, is_private) -> Embed:
         word = ' '.join(p_message_list[1:])
         definition = await search_word_definition(word, channel, username, is_private)
         return definition
-        # if is_private:
-        #     await username.send(definition)
-        # else:
-        #     await channel.send(definition)
     
     if p_message_list[0] == "/movie":
         await get_movie_info(p_message_list[1], username, channel, is_private)
@@ -148,11 +153,11 @@ async def handle_response(user_message, channel, username, is_private) -> Embed:
     if p_message_list[0] == "/nasa":
         await process_nasa_command(p_message_list, channel, username, is_private)
 
-    if p_message_list[0] == "!google":
+    if p_message_list[0] == "/google":
         search_result = await search_google(p_message_list, channel, username, is_private)
         return search_result
 
-    if p_message_list[0] == "!convert":
+    if p_message_list[0] == "/convert":
         convert_result = await currency_convert(p_message_list, channel, username, is_private)
         return convert_result
 

@@ -106,3 +106,12 @@ async def crypto_commands(channel, username, is_private):
             await username.send(embed=embed)
         else:
             await channel.send(embed=embed)
+
+async def commands_express(channel, username,is_private):
+    with open("app/text-files/commands_express.txt", "r") as file:
+        content = file.read()
+        embed = Embed(title="Gazeta Express Commands", description=content, color=discord.Color.green())
+        if is_private:
+            await username.send(embed=embed)
+        else:
+            await channel.send(embed=embed)
